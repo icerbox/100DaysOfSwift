@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     button1.layer.borderColor = UIColor.lightGray.cgColor
     
     askQuestion()
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
   }
 
   func askQuestion(action: UIAlertAction! = nil) {
@@ -42,6 +44,7 @@ class ViewController: UIViewController {
     
     title = countries[correctAnswer].uppercased()
     questionsCount += 1
+    print("Количество вопросов: \(questionsCount)")
   }
   
   @IBAction func buttonTapped(_ sender: UIButton) {
@@ -57,17 +60,30 @@ class ViewController: UIViewController {
       title! += ", счет игрока: \(score)"
     }
     
-    if questionsCount <= 10 {
-      let ac = UIAlertController(title: alertTitle, message: "Your score is \(score)", preferredStyle: .alert)
+    if questionsCount < 10 {
+      let ac = UIAlertController(title: alertTitle, message: "Ваши очки равны: \(score)", preferredStyle: .alert)
       
-      ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+      ac.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: askQuestion))
+      
+      present(ac, animated: true)
+    } else if questionsCount == 10 {
+      let ac = UIAlertController(title: alertTitle, message: "Игра окончена! Вы набрали: \(score) очков", preferredStyle: .alert)
+      score = 0
+      ac.addAction(UIAlertAction(title: "Начать заново", style: .default, handler: askQuestion))
       
       present(ac, animated: true)
     }
+      
     
   }
   
-  
+  @objc func shareTapped() {
+    let vc = UIAlertController(title: "Your score", message: "Your score is \(score)", preferredStyle: .alert)
+    vc.addAction(UIAlertAction(title: "Continue", style: .default, handler: {
+      (actionsdf) in vc.dismiss(animated: true, completion: nil)
+    }))
+    present(vc, animated: true)
+  }
   
 }
 
