@@ -2,7 +2,7 @@ import UIKit
 
 class ViewController: UITableViewController {
   
-  var pictures = [String]()
+  var pictures = [String]().sorted()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,7 +20,6 @@ class ViewController: UITableViewController {
         pictures.append(item)
       }
     }
-    print(pictures)
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,7 +35,9 @@ class ViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-      vc.selectedImage = pictures[indexPath.row]
+      print("Текущая картинка в массиве pictures: \(pictures[indexPath.row])")
+      let sortedArray = pictures.sorted()
+      vc.selectedImage = sortedArray[indexPath.row]
       vc.picturesArrayCount = pictures.count
       vc.currentArrayItemIndex = pictures.firstIndex(of: vc.selectedImage ?? "Нет значения")
       navigationController?.pushViewController(vc, animated: true)

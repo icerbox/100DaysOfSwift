@@ -20,7 +20,8 @@ class ViewController: UITableViewController {
         pictures.append(item)
       }
     }
-    print(pictures)
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +42,13 @@ class ViewController: UITableViewController {
       vc.currentArrayItemIndex = pictures.firstIndex(of: vc.selectedImage ?? "Нет значения")
       navigationController?.pushViewController(vc, animated: true)
     }
+  }
+  
+  @objc func shareTapped() {
+    let aboutProgram = "Это приложение для просмотра изображений шторма"
+    let vc = UIActivityViewController(activityItems: [aboutProgram], applicationActivities: [])
+    vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+    present(vc, animated: true)
   }
 }
 
