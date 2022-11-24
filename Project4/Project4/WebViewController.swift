@@ -8,15 +8,14 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class WebViewController: UIViewController, WKNavigationDelegate {
   
   // Создаем свойство webView для вызова WKWebView
   var webView: WKWebView!
   // Создаем свойство progressView для вызова UIProgressView
   var progressView: UIProgressView!
   // Создаем массив websites для хранения разрешенных сайтов
-  var websites = ["apple.com", "iltumen.ru", "hackingwithswift.com"]
-  
+  var selectedWebsite: String?
   
   override func loadView() {
     // Создаем новый экземпляр WKWEbView и назначаем его свойству webView
@@ -32,7 +31,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     super.viewDidLoad()
     
     // Добавляем кнопку в правый верхний угол навигейшн контроллера
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
+//    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
+    
     // Добавляем заполнитель .flexibleSpace чтобы отвести кнопки вправо
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
@@ -48,7 +48,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
     webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
     
     // Создаем константу url, которому создаем адрес URL из строки которая получена из первого элемента массива websites
-    let url = URL(string: "https://" + websites[0])!
+    guard let siteToLoad = selectedWebsite else {
+      return
+    }
+    let url = URL(string: "https://" + siteToLoad)!
     // Формируем запрос URL из константы url и загружаем его в наш webview
     webView.load(URLRequest(url: url))
     //
@@ -56,26 +59,26 @@ class ViewController: UIViewController, WKNavigationDelegate {
   }
   
   // Метод который запускается при нажатии на правую верхнюю кнопку "Open"
-  @objc func openTapped() {
-    // объявляем экземпляр UIALertController
-    let ac = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
-    
-    // Выводим все сайты из массива websites
-    for website in websites {
-      ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
-    }
-    
-    // Добавляем кнопку
-    ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-    ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-    present(ac, animated: true)
-  }
-  
-  func openPage(action: UIAlertAction) {
-    guard let actionTitle = action.title else { return }
-    guard let url = URL(string: "https://" + actionTitle) else { return }
-    webView.load(URLRequest(url: url))
-  }
+//  @objc func openTapped() {
+//    // объявляем экземпляр UIALertController
+//    let ac = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
+//
+//    // Выводим все сайты из массива websites
+//    for website in websites {
+//      ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
+//    }
+//
+//    // Добавляем кнопку
+//    ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//    ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+//    present(ac, animated: true)
+//  }
+//
+//  func openPage(action: UIAlertAction) {
+//    guard let actionTitle = action.title else { return }
+//    guard let url = URL(string: "https://" + actionTitle) else { return }
+//    webView.load(URLRequest(url: url))
+//  }
   //
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     title = webView.title
@@ -92,7 +95,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     // 1. Присваиваем константе url значение URL из навигации
     let url = navigationAction.request.url
     
-    guard navigationAction.navigationType == .other || navigationAction.navigationType == .reload else {
+    guard navigationAction.navigationType == .other else {
       decisionHandler(.cancel)
       let ac = UIAlertController(title: "Заблокировано", message: "Адрес не найден в списке безопасных", preferredStyle: .alert)
           ac.addAction(UIAlertAction(title: "Закрыть окно", style: .cancel, handler: nil))
@@ -102,16 +105,16 @@ class ViewController: UIViewController, WKNavigationDelegate {
     // 2. Мы используем if let для ракскрытия значения опшионала url.host. Это можно прочитать как, если в этом url есть хост, вытащи его. Под хостом имеется в виду домен вебсайта, вроде apple.com. Мы должны раскрыть его, так как не все url содержат
     if let host = url?.host {
           // 3. Проходимся по все сайтам в нашем массиве безопасных сайтов websites.
-          for website in websites {
-          // 4. Используем метод строки contains() чтобы проверить содержиться ли текущий хост в проверяемом вебсайте из массива websites
-            if host.contains(website) {
-              // 5. Если текущий хост содержит имя сайта из websites, то разрешаем загрузку
-              decisionHandler(.allow)
-              // 6. После этого производим выход из метода
-              return
-            }
-          }
+//      for website in websites {
+      // 4. Используем метод строки contains() чтобы проверить содержиться ли текущий хост в проверяемом вебсайте из массива websites
+        if host.contains(selectedWebsite!) {
+          // 5. Если текущий хост содержит имя сайта из websites, то разрешаем загрузку
+          decisionHandler(.allow)
+          // 6. После этого производим выход из метода
+          return
         }
+//      }
+    }
       // 7. Если хост не установлен, то мы вызываем decisionHandler с отрицательным результатом и отменяем загрузку
       decisionHandler(.cancel)
   }
