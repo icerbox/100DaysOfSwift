@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Project6b
 //
-//  Created by Андрей Антонен on 27.11.2022.
+//  Created by Айсен Еремеев on 27.11.2022.
 //
 
 import UIKit
@@ -12,35 +12,11 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let label1 = UILabel()
-    label1.translatesAutoresizingMaskIntoConstraints = false
-    label1.backgroundColor = .red
-    label1.text = "THESE"
-    label1.sizeToFit()
-    
-    let label2 = UILabel()
-    label2.translatesAutoresizingMaskIntoConstraints = false
-    label2.backgroundColor = .cyan
-    label2.text = "ARE"
-    label2.sizeToFit()
-    
-    let label3 = UILabel()
-    label3.translatesAutoresizingMaskIntoConstraints = false
-    label3.backgroundColor = .yellow
-    label3.text = "SOME"
-    label3.sizeToFit()
-    
-    let label4 = UILabel()
-    label4.translatesAutoresizingMaskIntoConstraints = false
-    label4.backgroundColor = .green
-    label4.text = "AWESOME"
-    label4.sizeToFit()
-    
-    let label5 = UILabel()
-    label5.translatesAutoresizingMaskIntoConstraints = false
-    label5.backgroundColor = .orange
-    label5.text = "LABELS"
-    label5.sizeToFit()
+    let label1 = UILabel.makeLabel(text: "THESE", backgroundColor: .red)
+    let label2 = UILabel.makeLabel(text: "ARE", backgroundColor: .cyan)
+    let label3 = UILabel.makeLabel(text: "SOME", backgroundColor: .yellow)
+    let label4 = UILabel.makeLabel(text: "AWESOME", backgroundColor: .green)
+    let label5 = UILabel.makeLabel(text: "LABELS", backgroundColor: .orange)
     
     view.addSubview(label1)
     view.addSubview(label2)
@@ -54,23 +30,37 @@ class ViewController: UIViewController {
 //      view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
 //    }
 //
-//    let metrics = ["labelHeight": 88]
+//    let metrics = ["labelHeight": 88, "spacing"]
+    let spacing: CGFloat = 10.0
 //    view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
     
     var previous: UILabel?
     
     for label in [label1, label2, label3, label4, label5] {
-      label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-      label.heightAnchor.constraint(equalToConstant: 88).isActive = true
+//      label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+      label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+                                     label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+      
+      label.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.20, constant: -spacing).isActive = true
       
       if let previous = previous {
         label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
       } else {
         label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
       }
-      
       previous = label
     }
+  }
+}
 
+extension UILabel {
+  static func makeLabel(text: String, backgroundColor: UIColor) -> UILabel {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.text = text
+    label.sizeToFit()
+    label.textAlignment = .center
+    label.backgroundColor = backgroundColor
+    return label
   }
 }
