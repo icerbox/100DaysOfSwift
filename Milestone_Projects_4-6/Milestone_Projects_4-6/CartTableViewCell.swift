@@ -88,18 +88,20 @@ class CartTableViewCell: UITableViewCell {
     stackView.addArrangedSubview(productPrice)
 //    stackView.backgroundColor = .green
     stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 10)
     return stackView
   }()
   
   lazy var stackView3: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
-    stackView.alignment = .leading
+    stackView.alignment = .center
     stackView.distribution = .fillProportionally
     stackView.addArrangedSubview(increaseButton)
     stackView.addArrangedSubview(productQuantity)
     stackView.addArrangedSubview(decreaseButton)
-//    stackView.backgroundColor = .green
+//    stackView.backgroundColor = .yellow
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -121,7 +123,7 @@ class CartTableViewCell: UITableViewCell {
       stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
       stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4),
       
-      stackView2.leadingAnchor.constraint(equalTo: stackView.trailingAnchor),
+      stackView2.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 20),
       stackView2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
       stackView2.trailingAnchor.constraint(equalTo: stackView3.leadingAnchor),
       stackView2.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -129,7 +131,8 @@ class CartTableViewCell: UITableViewCell {
       stackView3.leadingAnchor.constraint(equalTo: stackView2.trailingAnchor),
       stackView3.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
       stackView3.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-      stackView3.topAnchor.constraint(equalTo: contentView.topAnchor)
+      stackView3.topAnchor.constraint(equalTo: contentView.topAnchor),
+      stackView3.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1),
     ])
   }
 }

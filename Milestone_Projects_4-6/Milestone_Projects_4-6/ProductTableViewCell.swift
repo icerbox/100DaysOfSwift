@@ -62,6 +62,8 @@ class ProductTableViewCell: UITableViewCell {
     stackView.distribution = .fillProportionally
     stackView.addArrangedSubview(productTitle)
     stackView.addArrangedSubview(productPrice)
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 10)
 //    stackView.backgroundColor = .green
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView

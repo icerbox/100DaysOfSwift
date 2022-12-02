@@ -15,6 +15,25 @@ class RootViewController: UITableViewController, UIImagePickerControllerDelegate
   var pictures = [UIImage?]()
   var shoppingList =  [Product]()
   let currentImage: UIImageView? = nil
+  var cartCounter: Int {
+    get {
+      return shoppingList.count
+    }
+  }
+  
+  private lazy var cartCount: UILabel = {
+    let label = UILabel(frame: CGRect(x: 20, y: -8, width: 15, height: 15))
+    label.layer.borderColor = UIColor.clear.cgColor
+    label.layer.borderWidth = 2
+    label.layer.cornerRadius = label.bounds.size.height / 2
+    label.textAlignment = .center
+    label.layer.masksToBounds = true
+    label.font = UIFont(name: "SanFranciscoText-Light", size: 10)
+    label.textColor = .white
+    label.backgroundColor = UIColor.red.withAlphaComponent(0.8)
+    label.text = "\(cartCounter)"
+    return label
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,8 +42,15 @@ class RootViewController: UITableViewController, UIImagePickerControllerDelegate
     tableView.rowHeight = 150
     tableView.tableFooterView = UIView()
     
+    let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+    rightButton.setBackgroundImage(UIImage(systemName: "cart"), for: .normal)
+    rightButton.addTarget(self, action: #selector(openCart), for: .touchUpInside)
+    rightButton.addSubview(cartCount)
+    let rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+    
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(openAddProductWindow))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(openCart))
+    navigationItem.rightBarButtonItem = rightBarButtonItem
+    
     products.append(Product(title: "Хлеб", price: "114 руб.", image: UIImage(named: "bread") ?? UIImage()))
     products.append(Product(title: "Тушенка", price: "114 руб.", image: UIImage(named: "stew") ?? UIImage()))
     products.append(Product(title: "Макароны", price: "114 руб.", image: UIImage(named: "pasta") ?? UIImage()))
@@ -35,6 +61,7 @@ class RootViewController: UITableViewController, UIImagePickerControllerDelegate
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    self.cartCount.text = "\(self.cartCounter)"
     tableView.reloadData()
     print("Текущие продукты: \(products)")
     print("Текущие изображения: \(pictures.count)")
@@ -56,6 +83,7 @@ class RootViewController: UITableViewController, UIImagePickerControllerDelegate
     ac.addAction(UIAlertAction(title: "Добавить", style: .default, handler: {
       (action) in
       self.addToCart(product: self.products[indexPath.row])
+      self.cartCount.text = "\(self.cartCounter)"
     }))
     ac.addAction(UIAlertAction(title: "Закрыть окно", style: .cancel, handler: nil))
     present(ac, animated: true)
@@ -68,6 +96,7 @@ class RootViewController: UITableViewController, UIImagePickerControllerDelegate
         (action) in
         print("deleted")
         self.products.remove(at: indexPath.row)
+        self.cartCount.text = "\(self.cartCounter)"
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
       }))
       ac.addAction(UIAlertAction(title: "Закрыть окно", style: .cancel, handler: nil))
@@ -93,8 +122,5 @@ class RootViewController: UITableViewController, UIImagePickerControllerDelegate
     print(shoppingList)
   }
   
-  func deleteProduct() {
-    
-  }
-
+  
 }

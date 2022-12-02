@@ -44,6 +44,7 @@
                     <navigationItem key="navigationItem" title="Список покупок" id="Ad4-M9-M40"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DaT-eX-ARq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationItem title="Title" id="1sK-Ap-RxW"/>
             </objects>
             <point key="canvasLocation" x="1637.68115942029" y="57.589285714285708"/>
         </scene>
