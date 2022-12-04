@@ -119,11 +119,11 @@ class CartTableViewCell: UITableViewCell {
     NSLayoutConstraint.activate([
       stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
       stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-      stackView.trailingAnchor.constraint(equalTo: stackView2.leadingAnchor),
+      stackView.trailingAnchor.constraint(equalTo: stackView2.leadingAnchor, constant: 10),
       stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
       stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4),
       
-      stackView2.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 20),
+      stackView2.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10),
       stackView2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
       stackView2.trailingAnchor.constraint(equalTo: stackView3.leadingAnchor),
       stackView2.topAnchor.constraint(equalTo: contentView.topAnchor),

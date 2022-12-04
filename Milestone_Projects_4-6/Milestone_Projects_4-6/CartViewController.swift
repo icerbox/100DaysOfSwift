@@ -21,6 +21,7 @@ class CartViewController: UITableViewController {
       tableView.register(CartTableViewCell.self, forCellReuseIdentifier: "cartTableViewCell")
       tableView.rowHeight = 150
       tableView.tableFooterView = UIView()
+      print(currentCart)
     }
     
   override func viewWillAppear(_ animated: Bool) {
