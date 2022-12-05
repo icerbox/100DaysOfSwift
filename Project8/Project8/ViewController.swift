@@ -10,23 +10,24 @@ import UIKit
 class ViewController: UIViewController {
 
 //MARK: - Переменные и константы
-  var cluesLabel = UILabel.makeLabel(labelText: "ПОДСКАЗКИ", fontSize: 24, textAlignment: .left, numberOfLines: 0, setHuggingPriority: 1)
-  var answersLabel = UILabel.makeLabel(labelText: "ОТВЕТЫ", fontSize: 24, textAlignment: .right, numberOfLines: 0, setHuggingPriority: 1)
-  var scoreLabel = UILabel.makeLabel(labelText: "ВАШИ ОЧКИ: 0", fontSize: 22, textAlignment: .right, numberOfLines: 1, setHuggingPriority: 999)
+  var cluesLabel = UILabel.makeLabel(labelText: "ӨЙДӨТӨН БИЭРИИ", fontSize: 24, textAlignment: .left, numberOfLines: 0, setHuggingPriority: 1)
+  var answersLabel = UILabel.makeLabel(labelText: "ЭППИЭТ", fontSize: 24, textAlignment: .right, numberOfLines: 0, setHuggingPriority: 1)
+  var scoreLabel = UILabel.makeLabel(labelText: "ЭҺИГИ ОЧКУОҔУТ: 0", fontSize: 22, textAlignment: .right, numberOfLines: 1, setHuggingPriority: 999)
   var letterButtons = [UIButton]()
   var activatedButtons = [UIButton]()
   var solutions = [String]()
   var score = 0 {
     didSet {
-      scoreLabel.text = "Score: \(score)"
+      scoreLabel.text = "ОЧКУОҔУТ: \(score)"
     }
   }
+  var scoreNeededForLevelUp = 0
   var level = 1
   
   private let currentAnswer: UITextField = {
     let textField = UITextField()
     textField.translatesAutoresizingMaskIntoConstraints = false
-    textField.placeholder = "Нажми на буквы снизу чтобы угадать"
+    textField.placeholder = "ТААЙАРГА АЛЛАРАА БААР ТЫЛЛАРЫ БАТТАА"
     textField.textAlignment = .center
     textField.font = UIFont.systemFont(ofSize: 36)
     textField.isUserInteractionEnabled = false
@@ -36,7 +37,7 @@ class ViewController: UIViewController {
   private let submit: UIButton = {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("ПОДТВЕРДИТЬ", for: .normal)
+    button.setTitle("БИГЭРГЭТ", for: .normal)
     button.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
     return button
   }()
@@ -44,7 +45,7 @@ class ViewController: UIViewController {
   private let clear: UIButton = {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("ОЧИСТИТЬ", for: .normal)
+    button.setTitle("ЫРАСТАА", for: .normal)
     button.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
     return button
   }()
@@ -90,12 +91,20 @@ class ViewController: UIViewController {
       
       currentAnswer.text = ""
       score += 1
-      
-      if score % 7 == 0 {
-        let ac = UIAlertController(title: "Отлично!", message: "Вы готовы к следующему уровню?", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Поехали!", style: .default, handler: levelUp))
+      scoreNeededForLevelUp += 1
+      if scoreNeededForLevelUp % 7 == 0 {
+        let ac = UIAlertController(title: "ОҺУОБАЙ!", message: "Аныгыскы таһымҥа таҕыстыбыт?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Бардыбыт!", style: .default, handler: levelUp))
         present(ac, animated: true)
       }
+    } else if !currentAnswer.text!.isEmpty {
+      let ac = UIAlertController(title: nil, message: "Таайбатыгыт!", preferredStyle: .alert)
+      ac.addAction(UIAlertAction(title: "СӨП", style: .cancel))
+      if score != 0 {
+        score -= 1
+      }
+      clearTapped(self)
+      present(ac, animated: true)
     }
   }
   
@@ -110,12 +119,11 @@ class ViewController: UIViewController {
     }
   }
   
-  @objc func clearTapped(_ sender: UIButton) {
+  @objc func clearTapped(_ sender: Any) {
     currentAnswer.text = ""
     
     for button in activatedButtons {
       button.isHidden = false
-      
     }
   }
   
@@ -132,12 +140,13 @@ class ViewController: UIViewController {
         for (index, line) in lines.enumerated() {
           let parts = line.components(separatedBy: ": ")
           let answer = parts[0]
+          guard parts.count == 2 else { continue }
           let clue = parts[1]
           
           clueString += "\(index + 1). \(clue)\n"
           
           let solutionWord = answer.replacingOccurrences(of: "|", with: "")
-          solutionString += "\(solutionWord.count) letters\n"
+          solutionString += "\(solutionWord.count) буукуба\n"
           solutions.append(solutionWord)
           
           let bits = answer.components(separatedBy: "|")
@@ -175,13 +184,13 @@ class ViewController: UIViewController {
     for row in 0..<4 {
       for column in 0..<5 {
         let letterButton = UIButton(type: .system)
-        letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
+        letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 34)
         letterButton.setTitle("WWW", for: .normal)
         letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
 
         let frame = CGRect(x: column * width, y: row * height, width: width, height: height)
         letterButton.frame = frame
-
+        print(letterButton)
         buttonsView.addSubview(letterButton)
         letterButtons.append(letterButton)
       }
@@ -195,7 +204,7 @@ class ViewController: UIViewController {
       
       cluesLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor),
       cluesLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 100),
-      cluesLabel.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.6, constant: -100),
+      cluesLabel.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.9, constant: -100),
       
       answersLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor),
       answersLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -100),
