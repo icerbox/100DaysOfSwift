@@ -11,15 +11,7 @@ class ViewController: UITableViewController {
     
     navigationController?.navigationBar.prefersLargeTitles = true
     
-    let fm = FileManager.default
-    let path = Bundle.main.resourcePath!
-    let items = try! fm.contentsOfDirectory(atPath: path)
-    
-    for item in items {
-      if item.hasPrefix("nssl") {
-        pictures.append(item)
-      }
-    }
+    performSelector(inBackground: #selector(fetchData), with: nil)
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +33,21 @@ class ViewController: UITableViewController {
       vc.picturesArrayCount = pictures.count
       vc.currentArrayItemIndex = pictures.firstIndex(of: vc.selectedImage ?? "Нет значения")
       navigationController?.pushViewController(vc, animated: true)
+    }
+  }
+  
+  @objc func fetchData() {
+    let fm = FileManager.default
+    let path = Bundle.main.resourcePath!
+    let items = try! fm.contentsOfDirectory(atPath: path)
+    
+    for item in items {
+      if item.hasPrefix("nssl") {
+        pictures.append(item)
+      }
+    }
+    DispatchQueue.main.async { [weak self] in
+      self?.tableView.reloadData()
     }
   }
 }

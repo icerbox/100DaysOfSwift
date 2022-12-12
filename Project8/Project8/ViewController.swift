@@ -65,7 +65,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    loadLevel()
+    performSelector(inBackground: #selector(loadLevel), with: nil)
     setupConstraints()
   }
 //MARK: - Методы
@@ -80,15 +80,18 @@ class ViewController: UIViewController {
   
   @objc func submitTapped(_ sender: UIButton) {
     guard let answerText = currentAnswer.text else { return }
-    
+    print("answerText is: \(answerText)")
+    print("solutions is: \(solutions)")
     if let solutionPosition = solutions.firstIndex(of: answerText) {
+      print("solutionPosition is: \(solutionPosition)")
       activatedButtons.removeAll()
       
       var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
-      
+      print("splitAnswers is: \(splitAnswers)")
       splitAnswers?[solutionPosition] = answerText
+      print("splitAnswers?[solutionPosition] is \(splitAnswers?[solutionPosition])")
       answersLabel.text = splitAnswers?.joined(separator: "\n")
-      
+      print("answersLabel.text is: \(answersLabel.text)")
       currentAnswer.text = ""
       score += 1
       scoreNeededForLevelUp += 1
@@ -127,7 +130,7 @@ class ViewController: UIViewController {
     }
   }
   
-  func loadLevel() {
+  @objc func loadLevel() {
     var clueString = ""
     var solutionString = ""
     var letterBits = [String]()
@@ -135,10 +138,13 @@ class ViewController: UIViewController {
     if let levelFileURL = Bundle.main.url(forResource: "level\(level)", withExtension: "txt") {
       if let levelContents = try? String(contentsOf: levelFileURL) {
         var lines = levelContents.components(separatedBy: "\n")
+//        print("lines\(lines)")
         lines.shuffle()
         
         for (index, line) in lines.enumerated() {
+//          print("До использования components \(line)")
           let parts = line.components(separatedBy: ": ")
+//          print("После использования components: \(parts)")
           let answer = parts[0]
           guard parts.count == 2 else { continue }
           let clue = parts[1]
@@ -154,15 +160,17 @@ class ViewController: UIViewController {
         }
       }
     }
-    
-    cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
-    answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
-    
-    letterButtons.shuffle()
-    
-    if letterButtons.count == letterBits.count {
-      for i in 0..<letterButtons.count {
-        letterButtons[i].setTitle(letterBits[i], for: .normal)
+    DispatchQueue.main.async { [weak self] in
+      self?.cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+//      print("clueLabel.text: \(self?.cluesLabel.text)")
+      self?.answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+      
+      self?.letterButtons.shuffle()
+      
+      if self?.letterButtons.count == letterBits.count {
+        for i in 0..<self!.letterButtons.count {
+          self?.letterButtons[i].setTitle(letterBits[i], for: .normal)
+        }
       }
     }
   }
@@ -190,7 +198,6 @@ class ViewController: UIViewController {
 
         let frame = CGRect(x: column * width, y: row * height, width: width, height: height)
         letterButton.frame = frame
-        print(letterButton)
         buttonsView.addSubview(letterButton)
         letterButtons.append(letterButton)
       }
