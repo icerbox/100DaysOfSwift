@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2B7572294876960064DE1A /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B7571294876960064DE1A /* PictureCell.swift */; };
 		2BEFA4062927346B00035BF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFA4052927346B00035BF7 /* AppDelegate.swift */; };
 		2BEFA4082927346B00035BF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFA4072927346B00035BF7 /* SceneDelegate.swift */; };
 		2BEFA40A2927346B00035BF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFA4092927346B00035BF7 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B2B7571294876960064DE1A /* PictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCell.swift; sourceTree = "<group>"; };
 		2BEFA4022927346B00035BF7 /* project1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEFA4052927346B00035BF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BEFA4072927346B00035BF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				2BEFA4092927346B00035BF7 /* ViewController.swift */,
 				2BEFA4422927554100035BF7 /* DetailViewController.swift */,
 				2BEFA40B2927346B00035BF7 /* Main.storyboard */,
+				2B2B7571294876960064DE1A /* PictureCell.swift */,
 				2BEFA40E2927347300035BF7 /* Assets.xcassets */,
 				2BEFA4102927347300035BF7 /* LaunchScreen.storyboard */,
 				2BEFA4132927347300035BF7 /* Info.plist */,
@@ -191,6 +194,7 @@
 			files = (
 				2BEFA40A2927346B00035BF7 /* ViewController.swift in Sources */,
 				2BEFA4062927346B00035BF7 /* AppDelegate.swift in Sources */,
+				2B2B7572294876960064DE1A /* PictureCell.swift in Sources */,
 				2BEFA4082927346B00035BF7 /* SceneDelegate.swift in Sources */,
 				2BEFA4432927554100035BF7 /* DetailViewController.swift in Sources */,
 			);

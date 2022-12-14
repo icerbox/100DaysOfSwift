@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  project1
 //
-//  Created by Андрей Антонен on 18.11.2022.
+//  Created by Айсен Еремеев on 18.11.2022.
 //
 
 import UIKit
