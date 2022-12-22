@@ -31,14 +31,22 @@
                                     <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-cQ-vHm">
-                                            <rect key="frame" x="5" y="5" width="150" height="150"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YCf-cQ-vHm">
+                                            <rect key="frame" x="5" y="5" width="150" height="126"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9q-hy-fCi">
+                                            <rect key="frame" x="5" y="131" width="150" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="imageView" destination="YCf-cQ-vHm" id="e8i-uz-Eqh"/>
+                                    <outlet property="showLabel" destination="e9q-hy-fCi" id="YvO-8i-dPb"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -56,7 +64,6 @@
         <!--Detail View Controller-->
         <scene sceneID="dbo-ia-8Q6">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2B4-H9-R0P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Detail" id="Zrc-Yl-8Jc" customClass="DetailViewController" customModule="project1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xa5-Kw-xxG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -79,6 +86,7 @@
                         <outlet property="imageView" destination="47m-mo-wos" id="yU1-hw-vUc"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2B4-H9-R0P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3308.6956521739135" y="72.991071428571431"/>
         </scene>

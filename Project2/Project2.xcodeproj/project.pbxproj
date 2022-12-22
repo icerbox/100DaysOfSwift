@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2B75BD29502B160064DE1A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B75BC29502B160064DE1A /* Score.swift */; };
 		2BEFA4512929167800035BF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFA4502929167800035BF7 /* AppDelegate.swift */; };
 		2BEFA4532929167800035BF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFA4522929167800035BF7 /* SceneDelegate.swift */; };
 		2BEFA4552929167800035BF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEFA4542929167800035BF7 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B2B75BC29502B160064DE1A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		2BEFA44D2929167800035BF7 /* Project2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEFA4502929167800035BF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BEFA4522929167800035BF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				2BEFA4502929167800035BF7 /* AppDelegate.swift */,
 				2BEFA4522929167800035BF7 /* SceneDelegate.swift */,
 				2BEFA4542929167800035BF7 /* ViewController.swift */,
+				2B2B75BC29502B160064DE1A /* Score.swift */,
 				2BEFA4562929167800035BF7 /* Main.storyboard */,
 				2BEFA4592929167C00035BF7 /* Assets.xcassets */,
 				2BEFA45B2929167C00035BF7 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				2BEFA4552929167800035BF7 /* ViewController.swift in Sources */,
 				2BEFA4512929167800035BF7 /* AppDelegate.swift in Sources */,
+				2B2B75BD29502B160064DE1A /* Score.swift in Sources */,
 				2BEFA4532929167800035BF7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

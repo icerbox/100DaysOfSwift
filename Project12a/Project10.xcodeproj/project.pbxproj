@@ -15,6 +15,7 @@
 		2B2B756429475E1B0064DE1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2B756229475E1B0064DE1A /* LaunchScreen.storyboard */; };
 		2B2B756C29475FF40064DE1A /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B756B29475FF40064DE1A /* PersonCell.swift */; };
 		2B2B756E29476E0E0064DE1A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B756D29476E0E0064DE1A /* Person.swift */; };
+		2B2B75BB294C1AB90064DE1A /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B75BA294C1AB90064DE1A /* ScannerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2B2B756529475E1B0064DE1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B2B756B29475FF40064DE1A /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		2B2B756D29476E0E0064DE1A /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		2B2B75BA294C1AB90064DE1A /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				2B2B755729475E170064DE1A /* AppDelegate.swift */,
 				2B2B755929475E170064DE1A /* SceneDelegate.swift */,
 				2B2B755B29475E170064DE1A /* ViewController.swift */,
+				2B2B75BA294C1AB90064DE1A /* ScannerViewController.swift */,
 				2B2B756D29476E0E0064DE1A /* Person.swift */,
 				2B2B755D29475E170064DE1A /* Main.storyboard */,
 				2B2B756B29475FF40064DE1A /* PersonCell.swift */,
@@ -149,6 +152,7 @@
 				2B2B755829475E170064DE1A /* AppDelegate.swift in Sources */,
 				2B2B756C29475FF40064DE1A /* PersonCell.swift in Sources */,
 				2B2B755A29475E170064DE1A /* SceneDelegate.swift in Sources */,
+				2B2B75BB294C1AB90064DE1A /* ScannerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

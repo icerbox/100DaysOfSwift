@@ -12,12 +12,13 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(openBarCodeScanner))
     let defaults = UserDefaults.standard
     
     if let savedPeople = defaults.object(forKey: "people") as? Data {
       if let decodedPeople = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedPeople) as? [Person] {
         people = decodedPeople
+        print(people)
       }
     }
   }
@@ -52,6 +53,11 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
       picker.sourceType = .camera
     }
     present(picker, animated: true)
+  }
+  
+  @objc func openBarCodeScanner() {
+    let scanViewController = ScannerViewController()
+    present(scanViewController, animated: true)
   }
     
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -113,7 +119,6 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
       let defaults = UserDefaults.standard
       defaults.set(savedData, forKey: "people")
     }
-        
   }
 }
 
