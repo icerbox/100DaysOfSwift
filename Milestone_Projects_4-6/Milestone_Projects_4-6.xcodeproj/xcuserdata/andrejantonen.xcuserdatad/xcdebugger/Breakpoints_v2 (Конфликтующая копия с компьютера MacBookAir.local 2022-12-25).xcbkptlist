@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "BB7331D8-62D1-471F-B299-6F4A87AE068F"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6620BB9B-ACBA-4149-98CD-878DCA80362A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Milestone_Projects_4-6/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "RootViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "6620BB9B-ACBA-4149-98CD-878DCA80362A - 6dc57534bb97a221"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Milestone_Projects_4_6.ViewController.init(style: __C.UITableViewStyle) -&gt; Milestone_Projects_4_6.ViewController"
+                  moduleName = "Milestone_Projects_4-6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrejantonen/Dropbox/Mac2/Documents/GitHub/100DaysOfSwift/Milestone_Projects_4-6/Milestone_Projects_4-6/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "65">
+               </Location>
+               <Location
+                  uuid = "6620BB9B-ACBA-4149-98CD-878DCA80362A - db2b86a85431443f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Milestone_Projects_4_6.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Milestone_Projects_4_6.ViewController"
+                  moduleName = "Milestone_Projects_4-6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrejantonen/Dropbox/Mac2/Documents/GitHub/100DaysOfSwift/Milestone_Projects_4-6/Milestone_Projects_4-6/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "6620BB9B-ACBA-4149-98CD-878DCA80362A - 3e23e2a2e7c59924"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Milestone_Projects_4_6.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Milestone_Projects_4_6.ViewController&gt;"
+                  moduleName = "Milestone_Projects_4-6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andrejantonen/Dropbox/Mac2/Documents/GitHub/100DaysOfSwift/Milestone_Projects_4-6/Milestone_Projects_4-6/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "85">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
