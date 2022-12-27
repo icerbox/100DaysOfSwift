@@ -14,6 +14,7 @@
 		2B0B3441292F602600831D55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B0B3440292F602600831D55 /* Assets.xcassets */; };
 		2B0B3444292F602600831D55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B0B3442292F602600831D55 /* LaunchScreen.storyboard */; };
 		2B0B344C292F619400831D55 /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2B0B344B292F619400831D55 /* start.txt */; };
+		2B2B75BF295060040064DE1A /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B75BE295060040064DE1A /* Word.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2B0B3443292F602600831D55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B0B3445292F602600831D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B0B344B292F619400831D55 /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
+		2B2B75BE295060040064DE1A /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				2B0B3437292F602100831D55 /* AppDelegate.swift */,
 				2B0B3439292F602100831D55 /* SceneDelegate.swift */,
 				2B0B343B292F602100831D55 /* ViewController.swift */,
+				2B2B75BE295060040064DE1A /* Word.swift */,
 				2B0B343D292F602100831D55 /* Main.storyboard */,
 				2B0B3440292F602600831D55 /* Assets.xcassets */,
 				2B0B3442292F602600831D55 /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B0B343C292F602100831D55 /* ViewController.swift in Sources */,
+				2B2B75BF295060040064DE1A /* Word.swift in Sources */,
 				2B0B3438292F602100831D55 /* AppDelegate.swift in Sources */,
 				2B0B343A292F602100831D55 /* SceneDelegate.swift in Sources */,
 			);

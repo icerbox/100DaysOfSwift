@@ -16,7 +16,11 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11"
             endingLineNumber = "11"
+<<<<<<< HEAD
             landmarkName = "ViewController"
+=======
+            landmarkName = "RootViewController"
+>>>>>>> 9dc221fc9df6cb5edb272e1c38a0839679477d12
             landmarkType = "3">
             <Locations>
                <Location

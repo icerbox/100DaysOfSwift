@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Project2
 //
-//  Created by Андрей Антонен on 19.11.2022.
+//  Created by Айсен Еремеев on 19.11.2022.
 //
 
 import UIKit
@@ -13,13 +13,15 @@ class ViewController: UIViewController {
   @IBOutlet var button3: UIButton!
   
   var countries = [String]()
-  var score = 0
+  var max: Int = 0
+  var score: Int = 0
+  
   var correctAnswer = 0
   var questionsCount = 0
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "us", "uk"]
+    countries += ["Эстония", "Франция", "Германия", "Ирландия", "Италия", "Монако", "Нигерия", "Польша", "Россия", "Испания", "США", "Англия"]
     
     button1.layer.borderWidth = 1
     button2.layer.borderWidth = 1
@@ -32,9 +34,18 @@ class ViewController: UIViewController {
     askQuestion()
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+    
+    let defaults = UserDefaults.standard
+
+    if let savedScore = defaults.object(forKey: "max") as? Data {
+      if let decodedScore = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedScore) as? Int {
+        max = decodedScore
+      }
+    }
   }
 
   func askQuestion(action: UIAlertAction! = nil) {
+    print("Текущий рекорд: \(max) очков")
     countries.shuffle()
     correctAnswer = Int.random(in: 0...2)
     
@@ -47,15 +58,30 @@ class ViewController: UIViewController {
     print("Количество вопросов: \(questionsCount)")
   }
   
+  func newRound(action: UIAlertAction! = nil) {
+    print("Текущий рекорд: \(max) очков")
+    countries.shuffle()
+    correctAnswer = Int.random(in: 0...2)
+    
+    button1.setImage(UIImage(named: countries[0]), for: .normal)
+    button2.setImage(UIImage(named: countries[1]), for: .normal)
+    button3.setImage(UIImage(named: countries[2]), for: .normal)
+    
+    questionsCount = 1
+    score = 0
+    title = countries[correctAnswer].uppercased()
+    print("Количество вопросов: \(questionsCount)")
+  }
+  
   @IBAction func buttonTapped(_ sender: UIButton) {
     var alertTitle: String
     
     if sender.tag == correctAnswer {
-      alertTitle = "Correct"
+      alertTitle = "Правильно"
       score += 1
       title! += ", счет игрока: \(score)"
     } else {
-      alertTitle = "Wrong! That's the flag of \(countries[sender.tag])"
+      alertTitle = "Неправильно! Это флаг \(countries[sender.tag])"
       score -= 1
       title! += ", счет игрока: \(score)"
     }
@@ -66,24 +92,36 @@ class ViewController: UIViewController {
       ac.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: askQuestion))
       
       present(ac, animated: true)
-    } else if questionsCount == 10 {
-      let ac = UIAlertController(title: alertTitle, message: "Игра окончена! Вы набрали: \(score) очков", preferredStyle: .alert)
-      score = 0
-      ac.addAction(UIAlertAction(title: "Начать заново", style: .default, handler: askQuestion))
-      
-      present(ac, animated: true)
     }
-      
     
+    if questionsCount == 10 {
+      if score > max {
+        let ac = UIAlertController(title: "Поздравляем! Вы установили новый рекорд! \(score) очков", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Начать заново", style: .default, handler: newRound))
+        max = score
+        save()
+        present(ac, animated: true)
+      } else {
+        let ac = UIAlertController(title: alertTitle, message: "Игра окончена! Вы набрали: \(score) очков", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Начать заново", style: .default, handler: newRound))
+        
+        present(ac, animated: true)
+      }
+    }
   }
   
   @objc func shareTapped() {
-    let vc = UIAlertController(title: "Your score", message: "Your score is \(score)", preferredStyle: .alert)
-    vc.addAction(UIAlertAction(title: "Continue", style: .default, handler: {
+    let vc = UIAlertController(title: nil, message: "Ваши очки: \(score)", preferredStyle: .alert)
+    vc.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: {
       (actionsdf) in vc.dismiss(animated: true, completion: nil)
     }))
     present(vc, animated: true)
   }
   
+  func save() {
+    if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: score, requiringSecureCoding: false) {
+      let defaults = UserDefaults.standard
+      defaults.set(savedData, forKey: "max")
+    }
+  }
 }
-

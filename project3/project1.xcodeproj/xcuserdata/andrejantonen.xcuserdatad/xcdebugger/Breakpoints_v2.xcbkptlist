@@ -14,8 +14,13 @@
             filePath = "project1/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "70"
             endingLineNumber = "70"
+=======
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+>>>>>>> 9dc221fc9df6cb5edb272e1c38a0839679477d12
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>

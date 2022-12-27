@@ -10,10 +10,17 @@ import UIKit
 class ViewController: UITableViewController {
   
   var allWords = [String]()
-  var usedWords = [String]()
+  var usedWords = [Word]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    let defaults = UserDefaults.standard
+    if let savedData = defaults.object(forKey: "usedWords") as? Data {
+      if let decodedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? [Word] {
+        usedWords = decodedData
+      }
+    }
+    title = usedWords[0].currentWord
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(startGame))
@@ -27,12 +34,16 @@ class ViewController: UITableViewController {
     if allWords.isEmpty {
       allWords = ["silkworm"]
     }
-    startGame()
   }
-
+  
   @objc func startGame() {
+    // Устанавливаем в титле рандомное слово из базы слов
     title = allWords.randomElement()
-    usedWords.removeAll(keepingCapacity: true)
+    // Удаляем все сохраненные в userDefaults данные
+    deleteSavedData()
+    // Очищаем массив с использованными вопросами
+    usedWords.removeAll()
+    // перезагружаем таблицу
     tableView.reloadData()
   }
   
@@ -42,7 +53,8 @@ class ViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Word", for: indexPath)
-    cell.textLabel?.text = usedWords[indexPath.row]
+    let currentElement = usedWords[indexPath.row]
+    cell.textLabel?.text = currentElement.usedWordsArray
     return cell
   }
   
@@ -53,22 +65,23 @@ class ViewController: UITableViewController {
     let submitAction = UIAlertAction(title: "Submit", style: .default) {
       [weak self, weak ac] _ in
       guard let answer = ac?.textFields?[0].text else { return }
-      self?.submit(answer.lowercased())
+
+      self?.submit(answer)
     }
     ac.addAction(submitAction)
     present(ac, animated: true)
   }
+  
   func submit(_ answer: String) {
     let lowerAnswer = answer
-    print("Введенное слово \(lowerAnswer)")
     if isPossible(word: lowerAnswer) {
       if isOriginal(word: lowerAnswer) {
         if isReal(word: lowerAnswer) {
-          usedWords.insert(answer, at: 0)
+          usedWords.append(Word(currentWord: title ?? "", usedWordsArray: lowerAnswer))
           
           let indexPath = IndexPath(row: 0, section: 0)
           tableView.insertRows(at: [indexPath], with: .automatic)
-          
+          save()
           return
         } else {
           showErrorMessage(errorTitle: "Word not recognized", errorMessage: "You can't just make them up, you know!")
@@ -95,7 +108,13 @@ class ViewController: UITableViewController {
   }
   
   func isOriginal(word: String) -> Bool {
-    return !usedWords.contains(word)
+    for i in usedWords {
+      print("Попали внутрь цикла. Текущий элемент массива \(i.usedWordsArray)")
+      if i.usedWordsArray.contains(word) {
+        return false
+      }
+    }
+    return true
   }
   
   func isReal(word: String) -> Bool {
@@ -118,14 +137,21 @@ class ViewController: UITableViewController {
     ac.addAction(UIAlertAction(title: "OK", style: .default))
     present(ac, animated: true)
   }
+  
+  func save() {
+    print("Начинаем сохранение данных")
+    if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: usedWords, requiringSecureCoding: false) {
+      print("savedData: \(savedData)")
+      let defaults = UserDefaults.standard
+      defaults.set(savedData, forKey: "usedWords")
+    }
+  }
+  
+  func deleteSavedData() {
+    let defaults = UserDefaults.standard
+    let dictionary = defaults.dictionaryRepresentation()
+    dictionary.keys.forEach { key in
+      defaults.removeObject(forKey: key)
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
-
