@@ -29,7 +29,6 @@ class DetailViewController: UIViewController {
       super.viewDidLoad()
       setupViews()
       view.backgroundColor = .white
-//      print(navigationController?.viewControllers)
     }
   
   func setupViews() {
@@ -48,8 +47,8 @@ class DetailViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-//    navigationController?.hidesBarsOnTap = true
-//    navigationItem.largeTitleDisplayMode = .never
+    navigationController?.hidesBarsOnTap = true
+    navigationItem.largeTitleDisplayMode = .never
     
     DispatchQueue.global(qos: .background).async { [self] in
       let path = self.getDocumentsDirectory().appendingPathComponent(self.selectedImage!.fileName)
@@ -61,11 +60,11 @@ class DetailViewController: UIViewController {
     
   }
       
-//  override func viewWillDisappear(_ animated: Bool) {
-//    super.viewWillDisappear(animated)
-//    navigationController?.hidesBarsOnTap = false
-//  }
-//
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.hidesBarsOnTap = false
+  }
+
   func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]

@@ -7,8 +7,21 @@
 
 import UIKit
 
-class PictureCell: UITableViewCell {
+protocol myTableCellDelegate {
+  func myTableCellDelegate()
+}
 
+class PictureCell: UITableViewCell {
+  
+  var delegate: myTableCellDelegate?
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PictureCell.tapEdit(_:)))
+    addGestureRecognizer(tapGesture)
+  }
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupViews()
@@ -49,5 +62,10 @@ class PictureCell: UITableViewCell {
       caption.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -60),
       caption.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
+  }
+  
+  @objc func tapEdit(_ sender: UITapGestureRecognizer) {
+    print("tapEdit works")
+    delegate?.myTableCellDelegate()
   }
 }
