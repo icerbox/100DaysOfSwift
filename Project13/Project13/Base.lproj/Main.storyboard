@@ -114,6 +114,7 @@
                     <navigationItem key="navigationItem" id="ELL-vW-1C3"/>
                     <connections>
                         <outlet property="changeButton" destination="F0r-uV-Wew" id="QYi-8a-ERa"/>
+                        <outlet property="containerView" destination="8Xa-zp-Sub" id="ePQ-P7-QA5"/>
                         <outlet property="imageView" destination="2MD-Jd-5Uk" id="rGD-yV-0nv"/>
                         <outlet property="intensity" destination="ssI-bh-d2a" id="LcQ-eY-bhX"/>
                         <outlet property="radius" destination="xLi-ML-FYO" id="ral-9D-oLI"/>

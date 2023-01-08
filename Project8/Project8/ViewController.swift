@@ -75,7 +75,10 @@ class ViewController: UIViewController {
     
     currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
     activatedButtons.append(sender)
-    sender.isHidden = true
+//    sender.isHidden = true
+    UIButton.animate(withDuration: 1, delay: 0, options: []) {
+      sender.alpha = 0
+    }
   }
   
   @objc func submitTapped(_ sender: UIButton) {
@@ -87,11 +90,8 @@ class ViewController: UIViewController {
       activatedButtons.removeAll()
       
       var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
-      print("splitAnswers is: \(splitAnswers)")
       splitAnswers?[solutionPosition] = answerText
-      print("splitAnswers?[solutionPosition] is \(splitAnswers?[solutionPosition])")
       answersLabel.text = splitAnswers?.joined(separator: "\n")
-      print("answersLabel.text is: \(answersLabel.text)")
       currentAnswer.text = ""
       score += 1
       scoreNeededForLevelUp += 1
@@ -118,7 +118,9 @@ class ViewController: UIViewController {
     loadLevel()
     
     for button in letterButtons {
-      button.isHidden = false
+      UIButton.animate(withDuration: 1, delay: 0, options: []) {
+        button.alpha = 1
+      }
     }
   }
   
@@ -126,7 +128,9 @@ class ViewController: UIViewController {
     currentAnswer.text = ""
     
     for button in activatedButtons {
-      button.isHidden = false
+      UIButton.animate(withDuration: 1, delay: 0, options: []) {
+        button.alpha = 1
+      }
     }
   }
   

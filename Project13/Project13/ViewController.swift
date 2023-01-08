@@ -12,6 +12,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var intensity: UISlider!
   @IBOutlet weak var radius: UISlider!
+  @IBOutlet weak var containerView: UIView!
   
   
   @IBOutlet weak var changeButton: UIButton!
@@ -20,15 +21,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   var context: CIContext!
   var currentFilter: CIFilter!
 
-  
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    containerView.backgroundColor = UIColor(white: 0, alpha: 0)
+    
     title = "InstaFilter"
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(importPicture))
     
     context = CIContext()
     currentFilter = CIFilter(name: "CISepiaTone")
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+      UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+        print("Делаем не прозрачным")
+        self.view.updateConstraintsIfNeeded()
+        self.view.layoutSubviews()
+        self.view.layoutIfNeeded()
+        self.imageView.alpha = 1.0
+      })
   }
   
   @objc func importPicture() {
@@ -41,10 +53,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     guard let image = info[.editedImage] as? UIImage else { return }
     dismiss(animated: true)
-    currentImage = image
     
+    
+    currentImage = image
     let beginImage = CIImage(image: currentImage)
     currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+    
     applyProcessing()
   }
 
@@ -118,9 +132,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     guard let outputImage = currentFilter.outputImage else { return }
     if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
+      
+      print("Выводим изображение")
       let processedImage = UIImage(cgImage: cgImage)
       imageView.image = processedImage
-      
+      print("Выводим анимацию")
+      imageView.alpha = 0
+//      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//        UIView.animate(withDuration: 10.0, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+//          print("Делаем не прозрачным")
+//          self.view.updateConstraintsIfNeeded()
+//          self.view.layoutSubviews()
+//          self.view.layoutIfNeeded()
+//          self.imageView.alpha = 1.0
+//        })
+//      }
     }
   }
   

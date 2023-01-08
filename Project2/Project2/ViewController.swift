@@ -76,6 +76,12 @@ class ViewController: UIViewController {
   @IBAction func buttonTapped(_ sender: UIButton) {
     var alertTitle: String
     
+    UIButton.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
+      sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+    }, completion: {_ in
+      sender.transform = .identity
+    })
+    
     if sender.tag == correctAnswer {
       alertTitle = "Правильно"
       score += 1
@@ -104,7 +110,6 @@ class ViewController: UIViewController {
       } else {
         let ac = UIAlertController(title: alertTitle, message: "Игра окончена! Вы набрали: \(score) очков", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Начать заново", style: .default, handler: newRound))
-        
         present(ac, animated: true)
       }
     }
@@ -124,4 +129,5 @@ class ViewController: UIViewController {
       defaults.set(savedData, forKey: "max")
     }
   }
+  
 }
