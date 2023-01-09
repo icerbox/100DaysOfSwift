@@ -1,10 +1,19 @@
 [
     {
-        "name": "Taylor Swift",
-        "age": 26
+        "name": "Bob",
+        "age": 32,
+        "phone": [
+            { "type": "mobile", "number": "0123-456789" },
+            { "type": "work", "number": "040-456789" }
+        ]
     },
     {
-        "name": "Justin Bieber",
-        "age": 25
-    }
+        "name": "Alice",
+        "age": 56,
+        "address": {
+            "street": "Musterstrasse 12",
+            "zip": "20095",
+            "city": "Hamburg"
+        }
+    }    
 ]
