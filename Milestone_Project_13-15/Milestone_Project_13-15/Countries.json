@@ -1,4 +1,5 @@
-countries = [
+{
+"countries":[
 	{
 		"name": "Afghanistan",
 		"code": "AF",
@@ -4004,3 +4005,4 @@ countries = [
       	"flag": "https://restcountries.eu/data/zwe.svg"
    	}
 ]
+}
