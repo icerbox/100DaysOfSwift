@@ -1,4 +1,4 @@
-Countries = [
+countries = [
 	{
 		"name": "Afghanistan",
 		"code": "AF",
