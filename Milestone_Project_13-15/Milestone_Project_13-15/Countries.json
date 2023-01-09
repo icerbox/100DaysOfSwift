@@ -1,5 +1,4 @@
-{
-"countries":[
+let countries = """
 	{
 		"name": "Afghanistan",
 		"code": "AF",
@@ -4004,5 +4003,4 @@
      	},
       	"flag": "https://restcountries.eu/data/zwe.svg"
    	}
-]
-}
+"""
