@@ -14,7 +14,7 @@ protocol EditViewControllerDelegate: AnyObject {
 
 class EditViewController: UIViewController {
   
-  var delegate: EditViewControllerDelegate?
+  weak var delegate: EditViewControllerDelegate?
   
   var editingImage: Picture?
 

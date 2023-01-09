@@ -9,13 +9,8 @@ import UIKit
 
 
 
-class RootViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EditViewControllerDelegate, UIGestureRecognizerDelegate, myTableCellDelegate {
+class RootViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EditViewControllerDelegate, UIGestureRecognizerDelegate {
   
-  func myTableCellDelegate() {
-    print("tapped")
-  }
-  
-      
   func editViewControllerDidCancel(_ controller: EditViewController) {
     navigationController?.popViewController(animated: true)
   }
@@ -74,7 +69,6 @@ class RootViewController: UITableViewController, UIImagePickerControllerDelegate
     }
     let picture = pictures[indexPath.row]
     cell.caption.text = picture.caption
-    cell.delegate = self
     let path = getDocumentsDirectory().appendingPathComponent(picture.fileName)
     
     cell.image.image = UIImage(contentsOfFile: path.path)
