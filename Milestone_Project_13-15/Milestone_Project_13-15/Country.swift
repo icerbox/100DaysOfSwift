@@ -8,5 +8,16 @@
 import Foundation
 
 struct Country: Codable {
-  var name: String
+  let name: String
+  let code: String
+  let capital: String
+  let flag: String
+  let currency: Currency
 }
+
+struct Currency: Codable {
+  let code: String
+  let name: String
+//  let symbol: String
+}
+

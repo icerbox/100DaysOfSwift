@@ -8,5 +8,5 @@
 import Foundation
 
 struct Countries: Codable {
-  var 
+  var countries: [Country]
 }

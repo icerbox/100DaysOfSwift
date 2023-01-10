@@ -13,6 +13,7 @@
 		D031F317296BD03F0084E7F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D031F315296BD03F0084E7F1 /* LaunchScreen.storyboard */; };
 		D031F31F296BD2CE0084E7F1 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031F31E296BD2CE0084E7F1 /* Country.swift */; };
 		D031F321296BD63A0084E7F1 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031F320296BD63A0084E7F1 /* Countries.swift */; };
+		D031F323296C46F30084E7F1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031F322296C46F20084E7F1 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D031F318296BD03F0084E7F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D031F31E296BD2CE0084E7F1 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		D031F320296BD63A0084E7F1 /* Countries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
+		D031F322296C46F20084E7F1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				D031F30A296BD03B0084E7F1 /* AppDelegate.swift */,
 				D031F30E296BD03B0084E7F1 /* RootViewController.swift */,
+				D031F322296C46F20084E7F1 /* DetailViewController.swift */,
 				D031F31E296BD2CE0084E7F1 /* Country.swift */,
 				D031F320296BD63A0084E7F1 /* Countries.swift */,
 				D031F313296BD03F0084E7F1 /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			files = (
 				D031F30F296BD03B0084E7F1 /* RootViewController.swift in Sources */,
 				D031F31F296BD2CE0084E7F1 /* Country.swift in Sources */,
+				D031F323296C46F30084E7F1 /* DetailViewController.swift in Sources */,
 				D031F321296BD63A0084E7F1 /* Countries.swift in Sources */,
 				D031F30B296BD03B0084E7F1 /* AppDelegate.swift in Sources */,
 			);
@@ -286,7 +290,6 @@
 				INFOPLIST_FILE = "Milestone_Project_13-15/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -315,7 +318,6 @@
 				INFOPLIST_FILE = "Milestone_Project_13-15/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
