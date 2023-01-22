@@ -14,6 +14,7 @@ class ViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    deleteSavedData()
     let defaults = UserDefaults.standard
     if let savedData = defaults.object(forKey: "usedWords") as? Data {
       if let decodedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? [Word] {
@@ -21,7 +22,7 @@ class ViewController: UITableViewController {
       }
     }
     title = usedWords[0].currentWord
-    
+
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(startGame))
     
@@ -74,6 +75,7 @@ class ViewController: UITableViewController {
   
   func submit(_ answer: String) {
     let lowerAnswer = answer
+    
     if isPossible(word: lowerAnswer) {
       if isOriginal(word: lowerAnswer) {
         if isReal(word: lowerAnswer) {

@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
+//        assert(selectedImage != nil, "Selected image should always have a value")
       
         title = "Picture \(String(describing: currentArrayItemIndex! + 1)) of \(String(describing: picturesArrayCount!))"
       
