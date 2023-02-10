@@ -1,15 +1,13 @@
 var Action = function() { }
 
-
 Action.prototype = {
     
-    
 run: function(parameters) {
-    parameters.completionFunction({"URL": document.URL, "title": document.title});
+    parameters.completionFunction({"URL": document.URL, "title": document.title, "head": document.timeline});
 },
-    
+
 finalize: function(parameters) {
-    var customJavaScript = parameters["customJavaScript"]
+    var customJavaScript = parameters["customJavaScript"];
     eval(customJavaScript);
 }
     
