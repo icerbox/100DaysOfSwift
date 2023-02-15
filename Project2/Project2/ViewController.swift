@@ -4,10 +4,10 @@
 //
 //  Created by Айсен Еремеев on 19.11.2022.
 //
-
+import UserNotifications
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UNUserNotificationCenterDelegate {
   @IBOutlet var button1: UIButton!
   @IBOutlet var button2: UIButton!
   @IBOutlet var button3: UIButton!
@@ -21,6 +21,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    scheduleNotification()
     countries += ["Эстония", "Франция", "Германия", "Ирландия", "Италия", "Монако", "Нигерия", "Польша", "Россия", "Испания", "США", "Англия"]
     
     button1.layer.borderWidth = 1
@@ -130,4 +131,59 @@ class ViewController: UIViewController {
     }
   }
   
+    @objc func askForPermissions() {
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted {
+                print("Permissions received")
+            } else {
+                print("Permissions denied")
+            }
+        }
+    }
+    
+    @objc func scheduleNotification() {
+        askForPermissions()
+        registerCategories()
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Hey Dude!"
+        content.body = "It's time to play!"
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = .default
+        
+        var dateComponents = DateComponents()
+        
+        dateComponents.hour = 17
+        dateComponents.minute = 20
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
+    
+    func registerCategories() {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        
+        let show = UNNotificationAction(identifier: "show", title: "Let's play", options: .foreground)
+        
+        let close = UNNotificationAction(identifier: "close", title: "No, i don't want to play", options: .destructive)
+        
+        let category = UNNotificationCategory(identifier: "alarm", actions: [show, close], intentIdentifiers: [], options: [])
+        center.setNotificationCategories([category])
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }
